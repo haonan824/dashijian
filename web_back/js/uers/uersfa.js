@@ -2,7 +2,7 @@ var url = 'http://localhost:8000/';
 
 var user = {
     denglu: function(userName, userPassword, fanhui) {
-        $.post(url + 'admin/login', {
+        $.post(urlhou.denglu, {
             user_name: userName,
             password: userPassword
         }, function(res) {
@@ -10,12 +10,12 @@ var user = {
         });
     },
     tuichu: function(fanhui) {
-        $.post(url + 'admin/logout', function(res) {
+        $.post(urlhou.tuichu, function(res) {
             fanhui(res);
         });
     },
     yhxinxi: function(fanhui) {
-        $.get(url + 'admin/getuser', function(res) {
+        $.get(urlhou.yhxinxi, function(res) {
             fanhui(res)
         });
     }

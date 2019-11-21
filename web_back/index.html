@@ -72,6 +72,7 @@
     </div>
     <!-- /.modal -->
     <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="./js/uers/url.js"></script>
     <script src="./js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/uers/uersfa.js"></script>
     <script>
@@ -106,14 +107,10 @@
                 'height': frame_h
             });
         }
-
         resizeFrame();
-
         $(window).resize(function() {
             resizeFrame();
         })
-
-
         function setMenu(m, n) {
             $level01.eq(m).addClass('active').siblings().not('.level02').removeClass('active');
             if (m != 1) {
@@ -130,7 +127,8 @@
         $(function(){
             $('#tuichu').click(function() {
             $('#delcfmModel').modal('show')
-            $('#yes').click(function(){
+        });
+        $('#yes').click(function(){
                 user.tuichu(function(res) {
                     // console.log(res);
                     if (res.code === 200) {
@@ -141,18 +139,6 @@
                     }
                 });
             })
-            
-            // if () {
-            //     user.tuichu(function(res) {
-            //         // console.log(res);
-            //         if (res.code === 200) {
-            //             location.href = './login.html'
-            //         };
-            //     });
-            // } else {
-            //     return;
-            // };
-        });
         //用户详情
         user.yhxinxi(function(res) {
             // console.log(res);
