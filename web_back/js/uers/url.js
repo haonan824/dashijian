@@ -7,6 +7,6 @@ var urlhou = {
 
     show: url + 'admin/category_search',
     add: url + 'admin/category_add',
+    edit: url + 'admin/category_edit',
     delete: url + 'admin/category_delete',
-
 }
