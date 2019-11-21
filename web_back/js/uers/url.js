@@ -5,5 +5,8 @@ var urlhou = {
     tuichu: url + 'admin/logout',
     yhxinxi: url + 'admin/getuser',
 
-    show: url + 'admin/category_search'
+    show: url + 'admin/category_search',
+    add: url + 'admin/category_add',
+    delete: url + 'admin/category_delete',
+
 }
