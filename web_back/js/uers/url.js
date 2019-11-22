@@ -9,5 +9,9 @@ var urlhou = {
     add: url + 'admin/category_add',
     edit: url + 'admin/category_edit',
     delete: url + 'admin/category_delete',
-    article: url + 'admin/search'
+
+
+    article_search: url + 'admin/search',
+    article_delete: url + 'admin/article_delete'
+
 }

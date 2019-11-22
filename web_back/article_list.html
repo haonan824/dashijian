@@ -73,7 +73,28 @@
 
         </div>
     </div>
+    <div class="modal fade" id="delcfmModel">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您确认要删除吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="url" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="yes">确定</a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/uers/url.js"></script>
     <script src="./js/uers/article.js"></script>
     <script src="./js/template-web.js"></script>
@@ -94,19 +115,40 @@
             <td class="text-center">{{time.state}}</td>
             <td class="text-center">
                 <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
-                <a href="javascript:deleteTr( 1005 );" class="btn btn-danger btn-xs">删除</a>
+                <a href="javascript:;" class="btn btn-danger btn-xs del" data-id={{time.id}}>删除</a>
             </td>
         </tr>
         {{/each}}
     </script>
     <script>
         //文章显示
-        article_list.show(function(res) {
-            // console.log(res.data);
-            var htmlList = template('articleList', res)
-            console.log(htmlList);
-            $('#articleTbody').html(htmlList);
-        })
+        xianshi();
+        function xianshi() {
+            article_list.show(function(res) {
+                // console.log(res.data);
+                var htmlList = template('articleList', res)
+                console.log(htmlList);
+                $('#articleTbody').html(htmlList);
+            });
+        }
+        //文章删除
+        var id = null;
+        $('#articleTbody').on('click', '.del', function() {
+            id = $(this).attr('data-id');
+            $('#delcfmModel').modal('show');
+        });
+        $('#yes').click(function(){
+            article_list.delete(id, function(res) {
+                console.log(res);
+                if (res.code === 200) { 
+                    console.log('删除成功');
+                }else{
+                    $('#modalzi').text('删除失败');
+                    $('#myModal').modal('show');
+                }
+            });
+            xianshi();   
+        });
     </script>
 </body>
 
