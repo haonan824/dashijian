@@ -75,6 +75,26 @@
             </form>
         </div>
     </div>
+    <div class="modal fade" id="delcfmModel">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>保存成功</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="url" />
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="yes">确定</a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/uers/url.js"></script>
@@ -107,7 +127,14 @@
             };
             fd.set('content', tinyMCE.activeEditor.getContent());
             article_list.add(fd, function(res) {
-                console.log(res);
+                // console.log(res);
+                if (res.code === 201) {
+                    $('.modal-body').html(res.msg);
+                    $('#delcfmModel').modal('show');
+                }else{
+                    $('.modal-body').html('保存失败'+res.msg);
+                    $('#delcfmModel').modal('show');
+                };
             });
         });
     </script>
