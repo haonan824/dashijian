@@ -14,5 +14,16 @@ var article_list = {
                 fanhui(res);
             });
     },
-
+    add: function(fd, fanhui) {
+        $.ajax({
+            url: urlhou.article_publish,
+            type: 'post',
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function(res) {
+                fanhui(res)
+            }
+        });
+    }
 }

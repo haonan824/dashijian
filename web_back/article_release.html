@@ -79,6 +79,7 @@
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/uers/url.js"></script>
     <script src="./js/uers/category.js"></script>
+    <script src="./js/uers/article.js"></script>
     <script src="./js/template-web.js"></script>
     <script id="liebiao" type="text/html">
         {{each data itme}}
@@ -98,21 +99,15 @@
             var btn = $(this).text();
             console.log(btn);
             var fd = new FormData(document.getElementById('myform'));
+            // console.log(fd);
             if (btn === '发布') {
                 fd.append('state', '已发布');
             } else {
                 fd.append('state', '草稿');
             };
             fd.set('content', tinyMCE.activeEditor.getContent());
-            $.ajax({
-                url: 'http://localhost:8000/admin/article_publish',
-                type: 'post',
-                processData: false, // 不要让jquery去处理formData数据
-                contentType: false, // 不设置默认的请求
-                data: fd,
-                success: function(res) {
-                    console.log(res);
-                }
+            article_list.add(fd, function(res) {
+                console.log(res);
             });
         });
     </script>
