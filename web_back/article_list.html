@@ -121,7 +121,6 @@
             console.log(res);
             var htmlOption = template('Option',res);
             console.log(htmlOption);
-            
             $('#selCategory').html(htmlOption);
         });
         //筛选
@@ -154,7 +153,6 @@
                     onPageClick: function(event, page) {
                         // 更新全局变量curPage, 重新发请求
                         curPage = page
-                        // alert(page);
                         xianshi();
                     }
                 });
@@ -178,7 +176,6 @@
             });
             xianshi();   
         });
-
     </script>
 </body>
 

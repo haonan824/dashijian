@@ -12,6 +12,6 @@ var urlhou = {
 
 
     article_search: url + 'admin/search',
-    article_delete: url + 'admin/article_delete'
-
+    article_delete: url + 'admin/article_delete',
+    article_publish: url + 'admin/article_publish',
 }
