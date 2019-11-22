@@ -1,6 +1,10 @@
 var article_list = {
-    show: function(fanhui) {
-        $.get(urlhou.article_search, function(res) {
+    show: function(odj, fanhui) {
+        $.get(urlhou.article_search, {
+            page: odj.page,
+            type: odj.type,
+            state: odj.status
+        }, function(res) {
             fanhui(res);
         });
     },
