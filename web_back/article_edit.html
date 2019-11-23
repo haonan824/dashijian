@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/jedate/js/jedate.js"></script>
-    <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="js/tinymce/js/tinymce_setup.js"></script>
+
 </head>
 
 <body>
@@ -23,38 +20,39 @@
             文章编辑
         </div>
         <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
+            <form class="form-horizontal article_form" id="myform">
+                <div class="form-group" style="display: none;">
+                    <label for="inputEmail3" class="col-sm-2 control-label">文章ID：</label>
+                    <div class="col-sm-10">
+                        <input type="text" name='id' class="form-control" id="inputid">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" value="文章标题文字">
+                        <input type="text" name='title' class="form-control" id="inputEmail3">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
                     <div class="col-sm-10">
-                        <img src="images/pic06.jpg" class="article_cover">
-                        <input type="file" id="exampleInputFile">
+                        <img src="images/pic06.jpg" id="coverImg" class="article_cover">
+                        <input type="file" name="cover" id="exampleInputFile">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
-                            <option>类别一</option>
-                            <option>类别二</option>
-                            <option>类别三</option>
-                            <option selected>类别四</option>
-                            <option>类别五</option>
+                        <select class="form-control" name="type" id="articleOption">
+                            
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
                     <div class="col-sm-4">
-
                         <div class="input-group">
-                            <input type="text" class="form-control" value="2019-05-17" id="dateinput">
+                            <input type="text" class="form-control" name="date" value="2019-05-17" id="dateinput">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"
                                     onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
@@ -66,18 +64,100 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="rich_content" name="content" placeholder="文章内容" value="文章内容">
+                        <input type="text" class="form-control" id="rich_content" name="content" placeholder="文章内容" value="www">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">修改</button>
+                        <button type="button" id="btn" class="btn btn-success">修改</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <div class="modal fade" id="delcfmModel">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>修改成功</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="url" />
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="yes">确定</a>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/jedate/js/jedate.js"></script>
+    <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="js/tinymce/js/tinymce_setup.js"></script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/uers/url.js"></script>
+    <script src="./js/uers/category.js"></script>
+    <script src="./js/uers/article.js"></script>
+    <script src="./js/template-web.js"></script>
+    <script type="text/html" id="option">
+        {{each data itme}}
+        <option value="{{itme.id}}">{{itme.name}}</option>
+        {{/each}}
+    </script>
+    <script>
+        //分类显示
+        article.show(function(res) {
+            // console.log(res);
+            var htmlurl = template('option', res);
+            // console.log(htmlurl);
+            $('#articleOption').html(htmlurl);
+        });
+        //获取文章详细
+        var url = window.location.href;
+        console.log(url);
+        var weizhi = url.indexOf('?');
+        console.log(weizhi);
+        var urlid = url.substring(weizhi + 1);
+        console.log(urlid);
+        $('#inputid').val(urlid);
+        article_list.show({
+            'id': urlid
+        }, function(res) {
+            console.log(res);
+            $('#inputEmail3').val(res.data.title);
+            // console.log(a);
+            $('#coverImg').prop('src', res.data.cover);
+            $('#articleOption').val(res.data.type);
+            $('#dateinput').val(res.data.date);
+            $('#rich_content').val(res.data.content);
+        });
+        //点击修改
+        $('#btn').click(function() {
+            var fd = new FormData(document.getElementById('myform'));
+            article_list.edit(fd, function(res) {
+                console.log(res);
+                if (res.code === 200) {
+                    $('.modal-body').html(res.msg);
+                    $('#delcfmModel').modal('show');
+                } else {
+                    $('.modal-body').html('修改失败' + res.msg);
+                    $('#delcfmModel').modal('show');
+                };
+            })
+        });
+        $('#exampleInputFile').change(function () {
+            if (!this.files[0]) return;
 
+            var url = URL.createObjectURL(this.files[0]);
+   
+            // 设置图片的src
+            $('#coverImg').attr('src', url);
+        });
+    </script>
 </body>
-
 </html>

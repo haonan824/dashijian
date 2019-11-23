@@ -3,7 +3,8 @@ var article_list = {
         $.get(urlhou.article_search, {
             page: odj.page,
             type: odj.type,
-            state: odj.status
+            state: odj.status,
+            id: odj.id,
         }, function(res) {
             fanhui(res);
         });
@@ -25,5 +26,18 @@ var article_list = {
                 fanhui(res)
             }
         });
+    },
+    edit: function(fd, fanhui) {
+        $.ajax({
+            url: urlhou.article_edit,
+            type: 'post',
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function(res) {
+                fanhui(res)
+            }
+        });
     }
+
 }
