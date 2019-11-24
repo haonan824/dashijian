@@ -1,6 +1,7 @@
 var article_list = {
-    show: function(fanhui) {
+    show: function(odj, fanhui) {
         $.get(urlhou.article_search, {
+            id: odj.id,
             state: '已发布',
             perpage: 5
         }, function(res) {

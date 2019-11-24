@@ -221,7 +221,7 @@
             $('#left_menu').html(htmlSrc);
             $('#level_two').html('<li class="up"></li>' + htmlSrc);
         });
-        article_list.show(function(res) {
+        article_list.show({}, function(res) {
             console.log(res);
             var htmlSrc = template('jiaodian', res);
             console.log(htmlSrc);
