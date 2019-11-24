@@ -139,6 +139,7 @@
         //点击修改
         $('#btn').click(function() {
             var fd = new FormData(document.getElementById('myform'));
+            fd.set('content', tinyMCE.activeEditor.getContent());//修改
             article_list.edit(fd, function(res) {
                 console.log(res);
                 if (res.code === 200) {
