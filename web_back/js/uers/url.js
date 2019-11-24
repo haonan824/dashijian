@@ -14,5 +14,11 @@ var urlhou = {
     article_search: url + 'admin/search',
     article_delete: url + 'admin/article_delete',
     article_publish: url + 'admin/article_publish',
-    article_edit: url + 'admin/article_edit'
+    article_edit: url + 'admin/article_edit',
+
+    month_article_count: url + 'admin/month_article_count',
+    article_category_count: url + 'admin/article_category_count',
+    article_category_visit: url + 'admin/article_category_visit',
+    article_count: url + 'admin/article_count',
+    comment_count: url + 'admin/comment_count'
 }

@@ -38,6 +38,31 @@ var article_list = {
                 fanhui(res)
             }
         });
+    },
+    month_article_count: function(fanhui) {
+        $.get(urlhou.month_article_count, function(res) {
+            fanhui(res);
+        })
+    },
+    article_category_count: function(fanhui) {
+        $.get(urlhou.article_category_count, function(res) {
+            fanhui(res);
+        })
+    },
+    article_category_visit: function(fanhui) {
+        $.get(urlhou.article_category_visit, function(res) {
+            fanhui(res);
+        })
+    },
+    article_count: function(fanhui) {
+        $.get(urlhou.article_count, function(res) {
+            fanhui(res)
+        })
+    },
+    comment_count: function(fanhui) {
+        $.get(urlhou.comment_count, function(res) {
+            fanhui(res)
+        })
     }
 
 }

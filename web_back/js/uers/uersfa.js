@@ -1,5 +1,3 @@
-var url = 'http://localhost:8000/';
-
 var user = {
     denglu: function(userName, userPassword, fanhui) {
         $.post(urlhou.denglu, {
